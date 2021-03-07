@@ -22,12 +22,15 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # POST /articles or /articles.json
   def create
     @article = Article.new(article_params)
-    @search = Article.search(params[:q])
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: "Article was successfully created." }
@@ -46,6 +49,7 @@ class ArticlesController < ApplicationController
       if @article.update(article_params)
         format.html { redirect_to @article, notice: "Article was successfully updated." }
         format.json { render :show, status: :ok, location: @article }
+        format.js
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @article.errors, status: :unprocessable_entity }

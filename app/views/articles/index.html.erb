@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <h1>Articles</h1>
-<%= search_form_for @search, remote: true do |f| %>
+<%= search_form_for @search do |f| %>
     <div class="field">
       <%= f.text_field :title_cont, id: "title-search" %>
     </div>
@@ -18,7 +18,7 @@
 <br>
 
 
-
+<div id="edit-article" class="modal" tabindex="-1" role="dialog"></div>
 
 
 

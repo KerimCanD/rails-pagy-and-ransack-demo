@@ -7,14 +7,15 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="articles-table">
     <% articles.each do |article| %>
-      <tr class="row">
-        <td class="col-md-3"><%= article.title %></td>
-        <td class="col-md-3"><%= article.description %></td>
+      <tr id="article-<%=article.id%>" class="row">
+        <td id="article-title-<%=article.id%>" class="col-md-3"><%= article.title %></td>
+        <td id="article-description-<%=article.id%>" class="col-md-3"><%= article.description %></td>
         <td class="col-md-1"><%= link_to 'Show', article %></td>
-        <td class="col-md-1"><%= link_to 'Edit', edit_article_path(article) %></td>
-        <td class="col-md-1"><%= link_to 'Destroy', article, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
+        <td class="col-md-1"><%= link_to 'Edit', edit_article_path(article), remote: true %></td>
+        
+        <td class="col-md-1"><%= link_to 'Destroy', article_path(article), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

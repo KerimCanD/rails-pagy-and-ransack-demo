@@ -1,0 +1,5 @@
+$('#edit-article').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$("#article-title-<%=@article.id%>").html("<%=@article.title%>");
+$("#article-description-<%=@article.id%>").html("<%=@article.description%>");

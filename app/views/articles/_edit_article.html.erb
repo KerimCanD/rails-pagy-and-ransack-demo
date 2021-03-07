@@ -1,0 +1,26 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">New Article</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <%= simple_form_for(article, remote: true) do |f| %>
+      <div class="modal-body"> 
+        <div class="field">
+          <%= f.input :title, class: 'col-md-8' %>
+        </div>
+
+        <div class="field">
+          <%= f.input :description, type: :text_area, class: 'col-md-8' %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="action">
+          <%= f.submit "Submit", id: 'submit' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

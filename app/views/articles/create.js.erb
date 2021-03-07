@@ -1,4 +1,33 @@
 $('#new-article').modal('hide');
 $('body').removeClass('modal-open');
 $('.modal-backdrop').remove();
-$("#articles").html("<%= escape_javascript(render 'list', search: @search ,articles: Article.all.order(updated_at: :desc)) %>");
+
+
+document.getElementById("article_title").value = "";
+document.getElementById("article_description").value = "";
+
+var table = document.getElementById("articles-table");
+
+var row = table.insertRow(0);
+row.classList.add('row');
+
+var cell1 = row.insertCell(0);
+var cell2 = row.insertCell(1);
+var cell3 = row.insertCell(2);
+var cell4 = row.insertCell(3);
+var cell5 = row.insertCell(4);
+
+cell1.classList.add('col-md-3');
+cell2.classList.add('col-md-3');
+cell3.classList.add('col-md-1');
+cell4.classList.add('col-md-1');
+cell5.classList.add('col-md-1');
+
+cell1.id = "article-title-<%=@article.id%>"
+cell2.id = "article-description-<%=@article.id%>"
+
+cell1.innerHTML = "<%=@article.title%>";
+cell2.innerHTML = "<%=@article.description%>";
+cell3.innerHTML = "<%=escape_javascript(link_to "Show", @article)%>";
+cell4.innerHTML = "<%=escape_javascript(link_to 'Edit', edit_article_path( @article), remote: true)%>";
+cell5.innerHTML = "<%=escape_javascript(link_to 'Destroy', article_path(@article), method: :delete, remote: true, data: { confirm: 'Are you sure?' })%>";
