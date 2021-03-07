@@ -1,8 +1,12 @@
 <table class="table">
   <thead>
     <tr class="row">
-      <th class="col-md-3">Title</th>
-      <th class="col-md-3">Description</th>
+      <th class="col-md-3">
+        <%= sort_link(@search, :title, remote: true) %>
+      </th>
+      <th class="col-md-3">
+        <%= sort_link(@search, :description, remote: true) %>
+      </th>
       <th class="col-md-3" colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +18,9 @@
   </tbody>
 </table>
 
+<br>
+<%= pagy_bootstrap_nav(pagy).html_safe %>
+<br>
 
 <div id="new-article" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
