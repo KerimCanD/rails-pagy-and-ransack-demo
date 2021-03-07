@@ -1,0 +1,4 @@
+$('#new-article').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+$("#articles").html("<%= escape_javascript(render 'list', search: @search ,articles: Article.all.order(updated_at: :desc)) %>");

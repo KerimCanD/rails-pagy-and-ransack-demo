@@ -1,9 +1,14 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
-
+  #ransack filterları eklenecek, edit modal eklenecek, belki pagy data remote active muhabbeti
   # GET /articles or /articles.json
   def index
-    @articles = Article.all
+    @search = Article.order(updated_at: :desc).search(params[:q])
+    @pagy, @articles = pagy(@search.result)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /articles/1 or /articles/1.json
@@ -22,11 +27,12 @@ class ArticlesController < ApplicationController
   # POST /articles or /articles.json
   def create
     @article = Article.new(article_params)
-
+    @search = Article.search(params[:q])
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: "Article was successfully created." }
         format.json { render :show, status: :created, location: @article }
+        format.js
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @article.errors, status: :unprocessable_entity }
@@ -53,6 +59,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to articles_url, notice: "Article was successfully destroyed." }
       format.json { head :no_content }
+      format.js
     end
   end
 

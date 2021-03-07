@@ -1,0 +1,51 @@
+<table class="table">
+  <thead>
+    <tr class="row">
+      <th class="col-md-3">Title</th>
+      <th class="col-md-3">Description</th>
+      <th class="col-md-3" colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% articles.each do |article| %>
+      <tr class="row">
+        <td class="col-md-3"><%= article.title %></td>
+        <td class="col-md-3"><%= article.description %></td>
+        <td class="col-md-1"><%= link_to 'Show', article %></td>
+        <td class="col-md-1"><%= link_to 'Edit', edit_article_path(article) %></td>
+        <td class="col-md-1"><%= link_to 'Destroy', article, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<div id="new-article" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Article</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= simple_form_for(articles.new, remote: true) do |f| %>
+        <div class="modal-body"> 
+          <div class="field">
+            <%= f.input :title, class: 'col-md-8' %>
+          </div>
+
+          <div class="field">
+            <%= f.input :description, type: :text_area, class: 'col-md-8' %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="action">
+            <%= f.submit "Submit", id: 'submit' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

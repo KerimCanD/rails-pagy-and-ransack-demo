@@ -1,29 +1,24 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Articles</h1>
+<%= search_form_for @search, remote: true do |f| %>
+    <div class="field">
+      <%= f.text_field :title_cont, id: "title-search" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Search" %>
+    </div>
+  <% end %>
+<a data-toggle="modal" href="#new-article" style="margin:15px; float:right;">New Article</a>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.title %></td>
-        <td><%= article.description %></td>
-        <td><%= link_to 'Show', article %></td>
-        <td><%= link_to 'Edit', edit_article_path(article) %></td>
-        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<div id="articles">
+  <%= render 'list', search: @search, articles: @articles %>
+</div>
+<br>
+<%= pagy_bootstrap_nav(@pagy).html_safe %>
 <br>
 
-<%= link_to 'New Article', new_article_path %>
+
+
+
+
+

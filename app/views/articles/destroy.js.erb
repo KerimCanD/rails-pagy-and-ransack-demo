@@ -1,0 +1,1 @@
+$("#articles").html("<%= escape_javascript(render 'list', search: Article.order(updated_at: :desc).search(params[:q]) ,articles: Article.all.order(updated_at: :desc)) %>");
